@@ -77,9 +77,14 @@ Luego abre `http://localhost:8000` en tu navegador.
 
 ## Despliegue
 
-Este proyecto está configurado para desplegarse automáticamente en Netlify. La configuración se encuentra en `netlify.toml`.
+Este proyecto está desplegado en GitHub Pages.
 
-### Despliegue Manual en Netlify
+- **Repositorio GitHub**: https://github.com/MappingProcimec/utility-dashboard-test
+- **App en vivo**: https://mappingprocimec.github.io/utility-dashboard-test/
+
+### Despliegue en Netlify (Alternativo)
+
+El proyecto incluye configuración para Netlify en `netlify.toml`. Para desplegar en Netlify:
 
 1. Crea una cuenta en [Netlify](https://www.netlify.com/)
 2. Conecta tu repositorio de GitHub
