@@ -1,6 +1,13 @@
+import { initCurrency } from './currency.js';
+import { initBmi } from './bmi.js';
+import { initTodo } from './todo.js';
+import { initPassword } from './password.js';
+import { initUnits } from './units.js';
+
+const THEME_KEY = 'utility-dashboard-theme';
+
 function initTheme() {
   const toggle = document.getElementById('theme-toggle');
-  const THEME_KEY = 'utility-dashboard-theme';
   const saved = localStorage.getItem(THEME_KEY);
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const theme = saved || (prefersDark ? 'dark' : 'light');
@@ -40,4 +47,9 @@ function initTabs() {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initTabs();
+  initCurrency();
+  initBmi();
+  initTodo();
+  initPassword();
+  initUnits();
 });

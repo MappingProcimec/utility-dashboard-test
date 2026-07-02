@@ -1,0 +1,30 @@
+{
+  "base": "USD",
+  "lastUpdated": "2026-07-02",
+  "rates": {
+    "USD": 1,
+    "EUR": 0.92,
+    "GBP": 0.79,
+    "MXN": 17.15,
+    "JPY": 157.80,
+    "CAD": 1.36,
+    "AUD": 1.52,
+    "CHF": 0.89,
+    "COP": 4050.00,
+    "ARS": 895.50,
+    "BRL": 5.42
+  },
+  "names": {
+    "USD": "Dólar estadounidense",
+    "EUR": "Euro",
+    "GBP": "Libra esterlina",
+    "MXN": "Peso mexicano",
+    "JPY": "Yen japonés",
+    "CAD": "Dólar canadiense",
+    "AUD": "Dólar australiano",
+    "CHF": "Franco suizo",
+    "COP": "Peso colombiano",
+    "ARS": "Peso argentino",
+    "BRL": "Real brasileño"
+  }
+}
