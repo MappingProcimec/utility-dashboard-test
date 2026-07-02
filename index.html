@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel de Utilidades — conversor de monedas, IMC, tareas, contraseñas y unidades">
+  <title>Panel de Utilidades</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__brand">
+        <span class="header__logo" aria-hidden="true">⚡</span>
+        <h1 class="header__title">Panel de Utilidades</h1>
+      </div>
+      <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema claro/oscuro">
+        <span class="theme-toggle__icon theme-toggle__icon--light" aria-hidden="true">☀️</span>
+        <span class="theme-toggle__icon theme-toggle__icon--dark" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Utilidades disponibles">
+    <button type="button" class="tabs__btn tabs__btn--active" role="tab" id="tab-currency" aria-selected="true" aria-controls="panel-currency" data-tab="currency">
+      💱 Monedas
+    </button>
+    <button type="button" class="tabs__btn" role="tab" id="tab-bmi" aria-selected="false" aria-controls="panel-bmi" data-tab="bmi">
+      🏋️ IMC
+    </button>
+    <button type="button" class="tabs__btn" role="tab" id="tab-todo" aria-selected="false" aria-controls="panel-todo" data-tab="todo">
+      ✅ Tareas
+    </button>
+    <button type="button" class="tabs__btn" role="tab" id="tab-password" aria-selected="false" aria-controls="panel-password" data-tab="password">
+      🔐 Contraseñas
+    </button>
+    <button type="button" class="tabs__btn" role="tab" id="tab-units" aria-selected="false" aria-controls="panel-units" data-tab="units">
+      📏 Unidades
+    </button>
+  </nav>
+
+  <main class="main">
+    <!-- Conversor de monedas -->
+    <section id="panel-currency" class="panel panel--active" role="tabpanel" aria-labelledby="tab-currency">
+      <h2 class="panel__title">Conversor de Monedas</h2>
+      <p class="panel__desc">Convierte entre monedas usando tasas simuladas.</p>
+      <form id="currency-form" class="form" novalidate>
+        <div class="form__group">
+          <label for="currency-amount">Cantidad</label>
+          <input type="number" id="currency-amount" name="amount" min="0" step="any" placeholder="100" required>
+          <span class="form__error" id="currency-amount-error" role="alert"></span>
+        </div>
+        <div class="form__row">
+          <div class="form__group">
+            <label for="currency-from">De</label>
+            <select id="currency-from" name="from" required></select>
+          </div>
+          <button type="button" id="currency-swap" class="btn btn--icon" aria-label="Intercambiar monedas">⇄</button>
+          <div class="form__group">
+            <label for="currency-to">A</label>
+            <select id="currency-to" name="to" required></select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary">Convertir</button>
+      </form>
+      <div id="currency-result" class="result" aria-live="polite"></div>
+    </section>
+
+    <!-- Calculadora IMC -->
+    <section id="panel-bmi" class="panel" role="tabpanel" aria-labelledby="tab-bmi" hidden>
+      <h2 class="panel__title">Calculadora de IMC</h2>
+      <p class="panel__desc">Calcula tu índice de masa corporal y conoce tu categoría.</p>
+      <form id="bmi-form" class="form" novalidate>
+        <div class="form__group">
+          <label for="bmi-weight">Peso (kg)</label>
+          <input type="number" id="bmi-weight" name="weight" min="1" max="500" step="0.1" placeholder="70" required>
+          <span class="form__error" id="bmi-weight-error" role="alert"></span>
+        </div>
+        <div class="form__group">
+          <label for="bmi-height">Altura (cm)</label>
+          <input type="number" id="bmi-height" name="height" min="50" max="300" step="0.1" placeholder="175" required>
+          <span class="form__error" id="bmi-height-error" role="alert"></span>
+        </div>
+        <button type="submit" class="btn btn--primary">Calcular IMC</button>
+      </form>
+      <div id="bmi-result" class="result" aria-live="polite"></div>
+    </section>
+
+    <!-- Lista de tareas -->
+    <section id="panel-todo" class="panel" role="tabpanel" aria-labelledby="tab-todo" hidden>
+      <h2 class="panel__title">Lista de Tareas</h2>
+      <p class="panel__desc">Organiza tus pendientes. Se guardan automáticamente en tu navegador.</p>
+      <form id="todo-form" class="form form--inline" novalidate>
+        <div class="form__group form__group--grow">
+          <label for="todo-input" class="visually-hidden">Nueva tarea</label>
+          <input type="text" id="todo-input" name="task" maxlength="200" placeholder="Escribe una tarea..." required>
+          <span class="form__error" id="todo-input-error" role="alert"></span>
+        </div>
+        <button type="submit" class="btn btn--primary">Agregar</button>
+      </form>
+      <ul id="todo-list" class="todo-list" aria-label="Lista de tareas"></ul>
+      <p id="todo-empty" class="todo-empty">No hay tareas. ¡Agrega la primera!</p>
+      <button type="button" id="todo-clear-completed" class="btn btn--secondary btn--small" hidden>
+        Limpiar completadas
+      </button>
+    </section>
+
+    <!-- Generador de contraseñas -->
+    <section id="panel-password" class="panel" role="tabpanel" aria-labelledby="tab-password" hidden>
+      <h2 class="panel__title">Generador de Contraseñas</h2>
+      <p class="panel__desc">Crea contraseñas seguras con opciones personalizables.</p>
+      <form id="password-form" class="form" novalidate>
+        <div class="form__group">
+          <label for="password-length">Longitud: <span id="password-length-value">16</span></label>
+          <input type="range" id="password-length" name="length" min="8" max="64" value="16">
+          <span class="form__error" id="password-length-error" role="alert"></span>
+        </div>
+        <div class="form__group form__group--checkbox">
+          <label class="checkbox">
+            <input type="checkbox" id="password-numbers" name="numbers" checked>
+            Incluir números
+          </label>
+        </div>
+        <div class="form__group form__group--checkbox">
+          <label class="checkbox">
+            <input type="checkbox" id="password-symbols" name="symbols" checked>
+            Incluir símbolos
+          </label>
+        </div>
+        <button type="submit" class="btn btn--primary">Generar contraseña</button>
+      </form>
+      <div id="password-result" class="result" aria-live="polite"></div>
+    </section>
+
+    <!-- Conversor de unidades -->
+    <section id="panel-units" class="panel" role="tabpanel" aria-labelledby="tab-units" hidden>
+      <h2 class="panel__title">Conversor de Unidades</h2>
+      <p class="panel__desc">Convierte longitud, peso y temperatura.</p>
+      <form id="units-form" class="form" novalidate>
+        <div class="form__group">
+          <label for="units-category">Categoría</label>
+          <select id="units-category" name="category">
+            <option value="length">Longitud</option>
+            <option value="weight">Peso</option>
+            <option value="temperature">Temperatura</option>
+          </select>
+        </div>
+        <div class="form__group">
+          <label for="units-value">Valor</label>
+          <input type="number" id="units-value" name="value" step="any" placeholder="10" required>
+          <span class="form__error" id="units-value-error" role="alert"></span>
+        </div>
+        <div class="form__row">
+          <div class="form__group">
+            <label for="units-from">De</label>
+            <select id="units-from" name="from" required></select>
+          </div>
+          <button type="button" id="units-swap" class="btn btn--icon" aria-label="Intercambiar unidades">⇄</button>
+          <div class="form__group">
+            <label for="units-to">A</label>
+            <select id="units-to" name="to" required></select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary">Convertir</button>
+      </form>
+      <div id="units-result" class="result" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Panel de Utilidades &copy; 2026 — HTML, CSS y JavaScript vanilla</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
